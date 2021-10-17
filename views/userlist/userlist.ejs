@@ -1,0 +1,60 @@
+<div class="container mt-5" style="max-width: 800px;">
+    <main>
+        <% if(errMessage.length > 0){ %>
+                        
+            <div class="alert alert-warning">
+                <strong><%=errMessage %></strong>
+              </div>
+         <% }
+         else if (succMessage.length > 0) { %>
+            <div class="alert alert-success">
+                <strong><%=succMessage %></strong>
+            </div>
+            <% } %>
+        <div class="container-fluid">
+            <div class="card p-4">
+                <table id='challengetable' class='table' cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 30px;">#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="challengeUserListing">
+                        <%for (i=0;i<users.length;i++){ %>
+                            <tr>
+                                <td class="text-center">
+                                    <%=i+1%>
+                                </td>
+                                <td>
+                                    <a href="/userdetail/<%=users[i]._id%>">
+                                        <%= users[i].fname%>
+                                    </a>
+                                </td>
+                                <td>
+                                    <%= users[i].email%>
+                                </td>
+                                <td>
+                                    <a class="mx-2" href="/deleteuser/<%=users[i]._id%>"
+                                        onclick="return confirm('Are you want to delete <%= users[i].fname%>?')">
+                                        delete
+                                      </a>
+                                </td>
+                            </tr>
+                            <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+<script>
+    window.setTimeout(function() {
+         $(".alert").fadeTo(500, 0).slideUp(500, function(){
+         $(this).remove(); 
+     });
+     }, 2500);
+
+</script>
